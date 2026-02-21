@@ -1,14 +1,22 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
+
+
 app = Flask(__name__)
+
 @app.route('/')
 def inicio():
-    return "Bienvenido a BIBLIOTECA UEA -- Biblioteca Virtual para consulta de libros"
+    return render_template('index.html')
 
 
-@app.route('/libro/<LOQUEAGUASELLEVO>')
-def libro(LOQUEAGUASELLEVO):
-    return f"Libro: {LOQUEAGUASELLEVO} – Consulta cualquie libro en la  BIBLIOTECA UEA."
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+@app.route('/libro/<titulo>')
+def libro(titulo):
+    return render_template('libro.html', titulo=titulo)
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Inventario de Libros</h2>
+
+<a href="/agregar">Agregar Libro</a>
+
+<table border="1">
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Cantidad</th>
+<th>Precio</th>
+<th>Acciones</th>
+</tr>
+
+{% for libro in productos %}
+<tr>
+<td>{{ libro[0] }}</td>
+<td>{{ libro[1] }}</td>
+<td>{{ libro[2] }}</td>
+<td>${{ libro[3] }}</td>
+<td>
+<a href="/eliminar/{{ libro[0] }}">Eliminar</a>
+</td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

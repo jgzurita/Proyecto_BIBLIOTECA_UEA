@@ -1,30 +1,40 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <h2>Inventario de Libros</h2>
 
-<a href="/agregar">Agregar Libro</a>
+<table>
 
-<table border="1">
 <tr>
 <th>ID</th>
 <th>Nombre</th>
+<th>Categoria</th>
+<th>Autor</th>
+<th>Editorial</th>
 <th>Cantidad</th>
-<th>Precio</th>
 <th>Acciones</th>
 </tr>
 
-{% for libro in productos %}
+{% for libro in libros %}
+
 <tr>
-<td>{{ libro[0] }}</td>
-<td>{{ libro[1] }}</td>
-<td>{{ libro[2] }}</td>
-<td>${{ libro[3] }}</td>
+
+<td>{{ libro.id_libro }}</td>
+<td>{{ libro.nombre }}</td>
+<td>{{ libro.categoria }}</td>
+<td>{{ libro.autor }}</td>
+<td>{{ libro.editorial }}</td>
+<td>{{ libro.cantidad }}</td>
+
 <td>
-<a href="/eliminar/{{ libro[0] }}">Eliminar</a>
+<a class="boton-eliminar" href="/eliminar/{{ libro.id_libro }}">Eliminar</a>
 </td>
+
 </tr>
+
 {% endfor %}
+
 </table>
 
 {% endblock %}

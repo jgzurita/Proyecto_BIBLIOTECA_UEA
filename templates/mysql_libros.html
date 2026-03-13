@@ -1,0 +1,25 @@
+<h2>Libros registrados en MySQL</h2>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Nombre</th>
+<th>Categoria</th>
+<th>Autor</th>
+<th>Editorial</th>
+</tr>
+
+{% for libro in libros %}
+
+<tr>
+<td>{{libro.id_libro}}</td>
+<td>{{libro.nombre}}</td>
+<td>{{libro.categoria}}</td>
+<td>{{libro.autor}}</td>
+<td>{{libro.editorial}}</td>
+</tr>
+
+{% endfor %}
+
+</table>

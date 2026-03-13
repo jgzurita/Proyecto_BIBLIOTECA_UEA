@@ -1,43 +1,72 @@
 import os
 from flask import Flask, render_template, request, redirect
-from models import Producto, Inventario
-import database
+from conexion.conexion import obtener_conexion
+
+
 
 app = Flask(__name__)
 
-database.crear_tabla()
-inventario = Inventario()
 
+
+# pagina principal
 @app.route('/')
 def inicio():
     return render_template('index.html')
 
+# pagina acerca de
 @app.route('/about')
 def about():
     return render_template('about.html')
 
 
+
+# mostrar inventario de libros
 @app.route('/libros')
 def libros():
-    productos = inventario.obtener_todos()
-    return render_template('libros.html', productos=productos)
+
+    conexion = obtener_conexion()
+    cursor = conexion.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM libros")
+
+    libros = cursor.fetchall()
+
+    cursor.close()
+    conexion.close()
+
+    return render_template('libros.html', libros=libros)
 
 
 
 
-
-@app.route('/agregar', methods=['GET', 'POST'])
+# agregar libro
+@app.route('/agregar', methods=['GET','POST'])
 def agregar():
+
     if request.method == 'POST':
+
         nombre = request.form['nombre']
+        categoria = request.form['categoria']
+        descripcion = request.form['descripcion']
+        autor = request.form['autor']
+        editorial = request.form['editorial']
         cantidad = request.form['cantidad']
-        precio = request.form['precio']
 
-        if not nombre:
-            return "El nombre es obligatorio", 400
+        conexion = obtener_conexion()
+        cursor = conexion.cursor()
 
-        producto = Producto(None, nombre, cantidad, precio)
-        inventario.agregar(producto)
+        sql = """
+        INSERT INTO libros(nombre,categoria,descripcion,autor,editorial,cantidad)
+        VALUES(%s,%s,%s,%s,%s,%s)
+        """
+
+        cursor.execute(sql,(nombre,categoria,descripcion,autor,editorial,cantidad))
+
+        conexion.commit()
+
+        cursor.close()
+        conexion.close()
+
         return redirect('/libros')
 
     return render_template('agregar.html')
@@ -45,14 +74,24 @@ def agregar():
 
 
 
+
+# eliminar libro
 @app.route('/eliminar/<int:id>')
 def eliminar(id):
-    inventario.eliminar(id)
+
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+
+    cursor.execute("DELETE FROM libros WHERE id_libro=%s",(id,))
+
+    conexion.commit()
+
+    cursor.close()
+    conexion.close()
+
     return redirect('/libros')
 
-
-
-
+# iniciar servidor
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    port = int(os.environ.get("PORT",5000))
+    app.run(host='0.0.0.0',port=port)

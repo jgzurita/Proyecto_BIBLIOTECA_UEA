@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Editar Libro</h2>
+
+<form method="POST">
+
+    <input type="text" name="nombre" value="{{ libro.nombre }}" required>
+    <input type="text" name="categoria" value="{{ libro.categoria }}" required>
+    <textarea name="descripcion">{{ libro.descripcion }}</textarea>
+    <input type="text" name="autor" value="{{ libro.autor }}" required>
+    <input type="text" name="editorial" value="{{ libro.editorial }}" required>
+    <input type="number" name="cantidad" value="{{ libro.cantidad }}" required>
+
+    <button type="submit">Guardar Cambios</button>
+
+</form>
+
+{% endblock %}

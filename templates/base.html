@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <title>Biblioteca UEA</title>
-
 <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
-
 </head>
 
 <body>
 
 <h1>Sistema Biblioteca</h1>
 
-<nav>
+<nav class="navbar">
 
-<a href="/">Inicio</a>
-<a href="/libros">Inventario</a>
-<a href="/agregar">Agregar Libro</a>
-<a href="/about">Acerca de</a>
+{% if current_user.is_authenticated %}
+
+    <a href="/libros">📚 Inventario</a>
+
+    {% if current_user.tipo == 'admin' %}
+        <a href="/agregar">➕ Agregar Libro</a>
+        <a href="/about"> 🏢 Sobre Nosotros</a>
+    {% endif %}
+
+    <a href="/logout">🚪 Cerrar sesión</a>
+
+{% else %}
+
+    <a href="/login">🔐 Login</a>
+    <a href="/registro">📝 Registrarse</a>
+
+{% endif %}
 
 </nav>
 
-<div class="container">
-
 {% block content %}
 {% endblock %}
-
-</div>
 
 </body>
 </html>

@@ -4,17 +4,17 @@
 
 <h2>Agregar Libro</h2>
 
-<form method="POST">
+<form method="POST" enctype="multipart/form-data">
 
 <label>Nombre</label>
-<input type="text" name="nombre">
+<input type="text" name="nombre" required>
 
 <label>Categoria</label>
 <input type="text" name="categoria">
 
-<label>Descripcion</label>
-<input type="text" name="descripcion">
+<label>Descripción</label>
 
+<input type="text" name="descripcion">
 <label>Autor</label>
 <input type="text" name="autor">
 
@@ -24,7 +24,10 @@
 <label>Cantidad</label>
 <input type="number" name="cantidad">
 
-<button type="submit">Guardar Libro</button>
+<label>Imagen</label>
+<input type="file" name="imagen">
+
+<button type="submit">Guardar</button>
 
 </form>
 

@@ -4,33 +4,54 @@
 
 <h2>Inventario de Libros</h2>
 
+<!-- BOTÓN SOLO UNA VEZ -->
+<div class="contenedor-pdf">
+    <a href="/reporte_pdf" class="btn-pdf">📄 Descargar PDF</a>
+</div>
+
 <table>
 
 <tr>
-<th>ID</th>
-<th>Nombre</th>
-<th>Categoria</th>
-<th>Autor</th>
-<th>Editorial</th>
-<th>Cantidad</th>
-<th>Acciones</th>
+    <th>ID</th>
+    <th>Imagen</th>
+    <th>Nombre</th>
+    <th>Categoria</th>
+    <th>Autor</th>
+    <th>Editorial</th>
+    <th>Cantidad</th>
+
+    {% if current_user.tipo == 'admin' %}
+    <th>Acciones</th>
+    {% endif %}
 </tr>
 
 {% for libro in libros %}
 
 <tr>
+    <td>{{ libro.id_libro }}</td>
 
-<td>{{ libro.id_libro }}</td>
-<td>{{ libro.nombre }}</td>
-<td>{{ libro.categoria }}</td>
-<td>{{ libro.autor }}</td>
-<td>{{ libro.editorial }}</td>
-<td>{{ libro.cantidad }}</td>
+    <td>
+        {% if libro.imagen %}
+        <img src="{{ url_for('static', filename='img/libros/' + libro.imagen) }}" width="70">
+        {% else %}
+        Sin imagen
+        {% endif %}
+    </td>
 
-<td>
-<a class="boton-eliminar" href="/eliminar/{{ libro.id_libro }}">Eliminar</a>
-</td>
+    <td>{{ libro.nombre }}</td>
+    <td>{{ libro.categoria }}</td>
+    <td>{{ libro.autor }}</td>
+    <td>{{ libro.editorial }}</td>
+    <td>{{ libro.cantidad }}</td>
 
+    {% if current_user.tipo == 'admin' %}
+    <td>
+        <a href="/editar/{{ libro.id_libro }}">✏️ Editar</a>
+        <a class="boton-eliminar" href="/eliminar/{{ libro.id_libro }}">
+            ❌ Eliminar
+        </a>
+    </td>
+    {% endif %}
 </tr>
 
 {% endfor %}

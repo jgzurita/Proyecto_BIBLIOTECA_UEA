@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="contenedor-prestar">
+
+    <form method="POST" class="form-prestar">
+        <h2>📚 Prestar Libro</h2>
+
+        <label>Libro:</label>
+        <input type="text" value="{{ libro.nombre }}" disabled>
+
+        <label>Usuario:</label>
+        <select name="usuario" required>
+            {% for u in usuarios %}
+                <option value="{{ u.id_usuario }}">{{ u.nombre }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Confirmar Préstamo</button>
+    </form>
+
+</div>
+
+{% endblock %}

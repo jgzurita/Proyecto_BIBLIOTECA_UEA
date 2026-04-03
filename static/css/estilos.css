@@ -1,128 +1,169 @@
-/* estilo general de la pagina */
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
+/* reset basico */
+*{
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* barra de navegacion */
+/* fondo general */
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    color: #2c3e50;
+}
+
+p{
+    
+    color: #16596d;
+}
+
+/* navbar */
 .navbar {
-    background: #2c3e50;
-    padding: 15px;
+    background: rgba(44, 62, 80, 0.95);
+    backdrop-filter: blur(8px);
+    padding: 15px 30px;
     display: flex;
-    gap: 15px;
+    gap: 25px;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 .navbar a {
-    color: white;
+    color: #ecf0f1;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
 .navbar a:hover {
     color: #4ca1af;
 }
 
-/* contenedor principal */
+/* contenedor */
 .container{
-    width: 80%;
-    margin: auto;
-    margin-top: 40px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
 }
 
 /* titulos */
 h1{
     text-align: center;
-    color: #2c3e50;
+    color: white;
+    margin-bottom: 20px;
+    font-size: 32px;
 }
 
 h2{
     text-align: center;
-    color: #34495e;
+    color: #1d867e;
+    margin-bottom: 20px;
 }
 
-/* tablas */
+/* tabla */
 table{
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    background-color: white;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.15);
 }
 
 th{
-    background-color: #34495e;
+    background: linear-gradient(45deg, #34495e, #2c3e50);
     color: white;
-    padding: 12px;
+    padding: 14px;
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
 td{
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
 }
 
 tr:hover{
-    background-color: #f2f2f2;
+    background-color: #f8f9fa;
+    transition: 0.2s;
+}
+
+/* imagen tabla */
+td img{
+    width: 50px;
+    border-radius: 6px;
+}
+
+/* botones acciones */
+a{
+    text-decoration: none;
+}
+
+.boton-editar{
+    color: #2980b9;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.boton-editar:hover{
+    color: #1f618d;
+}
+
+.boton-eliminar{
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.boton-eliminar:hover{
+    color: #922b21;
 }
 
 /* formularios */
 form{
-    background-color: white;
-    padding: 25px;
+    background: white;
+    padding: 30px;
     width: 400px;
     margin: auto;
-    border-radius: 6px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
 }
 
 /* inputs */
 input{
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 15px;
+    padding: 10px;
+    margin: 10px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: 0.3s;
+}
+
+input:focus{
+    border-color: #4ca1af;
+    box-shadow: 0 0 6px rgba(76,161,175,0.5);
 }
 
 /* botones */
 button{
-    background-color: #1abc9c;
+    background: linear-gradient(45deg, #1abc9c, #16a085);
     border: none;
-    padding: 10px;
+    padding: 12px;
     color: white;
     font-weight: bold;
     cursor: pointer;
     width: 100%;
+    border-radius: 8px;
+    transition: 0.3s;
 }
 
 button:hover{
-    background-color: #16a085;
+    transform: scale(1.03);
 }
 
-/* boton eliminar */
-.boton-eliminar{
-    color: red;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.boton-eliminar:hover{
-    color: darkred;
-}
-
-
-
-
-
-
-
-
-/* Fondo general */
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #2c3e50, #4ca1af);
-}
-
-/* Contenedor centrado */
+/* login */
 .login-container {
     display: flex;
     justify-content: center;
@@ -130,55 +171,32 @@ body {
     height: 80vh;
 }
 
-/* Caja del login */
 .login-form {
     background: white;
-    padding: 30px;
-    border-radius: 12px;
-    width: 300px;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    padding: 35px;
+    border-radius: 15px;
+    width: 320px;
+    box-shadow: 0px 15px 30px rgba(0,0,0,0.3);
     text-align: center;
 }
 
-/* Título */
 .login-form h2 {
     margin-bottom: 20px;
-    color: #2c3e50;
 }
 
-/* Inputs */
 .login-form input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    outline: none;
-    transition: 0.3s;
+    border-radius: 10px;
 }
 
-.login-form input:focus {
-    border-color: #4ca1af;
-    box-shadow: 0 0 5px rgba(76, 161, 175, 0.5);
-}
-
-/* Botón */
 .login-form button {
-    width: 100%;
-    padding: 10px;
     background: #2c3e50;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
 }
 
 .login-form button:hover {
     background: #4ca1af;
 }
 
-/* Link registro */
+/* link registro */
 .registro-link {
     margin-top: 15px;
     font-size: 14px;
@@ -186,7 +204,6 @@ body {
 
 .registro-link a {
     color: #4ca1af;
-    text-decoration: none;
 }
 
 .registro-link a:hover {
@@ -196,25 +213,49 @@ body {
 
 
 
+
+/* boton pdf */
 .contenedor-pdf {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 15px;
 }
 
-
 .btn-pdf {
     background: linear-gradient(45deg, #e74c3c, #c0392b);
     color: white;
     padding: 10px 18px;
     border-radius: 8px;
-    text-decoration: none;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 
+
 .btn-pdf:hover {
-    background: linear-gradient(45deg, #c0392b, #922b21);
     transform: scale(1.05);
+}
+
+
+
+.boton-prestar{
+    color: #27ae60;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.boton-prestar:hover{
+    color: #1e8449;
+}
+
+.btn-devolver {
+    background: #27ae60;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.btn-devolver:hover {
+    background: #1e8449;
 }

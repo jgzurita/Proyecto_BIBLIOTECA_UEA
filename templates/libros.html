@@ -2,11 +2,12 @@
 
 {% block content %}
 
-<h2>Inventario de Libros</h2>
+<h2>Inventario de Libros UEA</h2>
 
-<!-- BOTÓN SOLO UNA VEZ -->
+
 <div class="contenedor-pdf">
     <a href="/reporte_pdf" class="btn-pdf">📄 Descargar PDF</a>
+    
 </div>
 
 <table>
@@ -50,12 +51,38 @@
         <a class="boton-eliminar" href="/eliminar/{{ libro.id_libro }}">
             ❌ Eliminar
         </a>
+        <a href="/prestar/{{ libro.id_libro }}" class="btn-prestar">📚 Prestar</a>
+
+
+        
     </td>
     {% endif %}
 </tr>
 
 {% endfor %}
 
+</table>
+
+<h2>📚 Libros Prestados</h2>
+
+<table>
+    <tr>
+        <th>Libro</th>
+        <th>Usuario</th>
+        <th>Fecha</th>
+        <th>Acción</th>
+    </tr>
+
+    {% for p in prestamos %}
+    <tr>
+        <td>{{ p.nombre }}</td>
+        <td>{{ p.usuario }}</td>
+        <td>{{ p.fecha_prestamo }}</td>
+        <td>
+            <a href="/devolver/{{ p.id_prestamo }}" class="btn-devolver">↩ Devolver</a>
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 
 {% endblock %}

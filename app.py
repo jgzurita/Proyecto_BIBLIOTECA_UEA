@@ -18,12 +18,12 @@ import re
 app = Flask(__name__)
 app.secret_key = "clave_secreta"
 
-# login
+##### login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-# imagenes
+# ###imagenes
 UPLOAD_FOLDER = 'static/img/libros'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -66,6 +66,11 @@ def load_user(user_id):
     conexion.close()
     return None
 
+
+
+
+#################################################
+
 # inicio
 @app.route('/')
 def inicio():
@@ -101,7 +106,7 @@ def libros():
 
     return render_template('libros.html', libros=libros, prestamos=prestamos)
 
-# agregar
+# ###########agregar
 @app.route('/agregar', methods=['GET','POST'])
 @login_required
 def agregar():
@@ -140,6 +145,11 @@ def agregar():
         return redirect(url_for('libros'))
 
     return render_template('agregar.html')
+
+
+
+
+
 
 # eliminar logico
 @app.route('/eliminar/<int:id>')
@@ -198,6 +208,10 @@ def editar(id):
     conexion.close()
     return render_template('editar.html', libro=libro)
 
+
+
+#######################################################
+
 # registro
 @app.route('/registro', methods=['GET','POST'])
 def registro():
@@ -252,7 +266,10 @@ def registro():
         return redirect(url_for('login'))
 
     return render_template('registro.html', errores={}, datos={})
-# login corregido
+
+
+####################################################################
+# login ###
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 
@@ -263,7 +280,7 @@ def login():
         conexion = obtener_conexion()
         cursor = conexion.cursor(dictionary=True)
 
-        # usuarios (con hash)
+  
         cursor.execute("SELECT * FROM usuarios WHERE email=%s", (email,))
         user = cursor.fetchone()
 
@@ -281,14 +298,14 @@ def login():
             conexion.close()
             return redirect(url_for('libros'))
 
-        # admin (hash o texto plano)
+        
         cursor.execute("SELECT * FROM administradores WHERE email=%s", (email,))
         admin = cursor.fetchone()
 
         if admin:
             password_db = admin['password']
 
-            # 🔥 acepta hash o texto plano
+           
             if check_password_hash(password_db, password) or password_db == password:
                 usuario = Usuario(
                     admin['id_admin'],
@@ -317,8 +334,8 @@ def logout():
     return redirect(url_for('login'))
 
 
-
-# prestar libro
+#######################################################
+# ############prestar libro
 @app.route('/prestar/<int:id>', methods=['GET', 'POST'])
 @login_required
 def prestar(id):
@@ -365,7 +382,7 @@ def prestar(id):
     return render_template('prestar.html', libro=libro, usuarios=usuarios)
 
 
-
+########################################################
 
 
 #########
@@ -387,14 +404,14 @@ def devolver(id):
     if prestamo:
         id_libro = prestamo[0]
 
-        # actualizar prestamo
+        ## actualizar prestamo
         cursor.execute("""
         UPDATE prestamos 
         SET estado='devuelto', fecha_devolucion=NOW()
         WHERE id_prestamo=%s
         """, (id,))
 
-        # devolver stock
+        ### devolver stock
         cursor.execute("""
         UPDATE libros SET cantidad = cantidad + 1
         WHERE id_libro=%s
@@ -411,7 +428,7 @@ def devolver(id):
 
 
 
-########
+#######################
 
 
 # reporte pdf
@@ -458,7 +475,7 @@ def reporte_pdf():
     )
 
 
-###############
+##############################final
 
 # run
 if __name__ == '__main__':
